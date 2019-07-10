@@ -18,7 +18,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [ '.js', '.jsx' ]
   },
 
   devtool: '#source-map',
@@ -29,8 +29,8 @@ module.exports = {
     publicPath: '/'
   },
 
-  module: {
-    rules: [
+ module: {
+      rules: [
       {
         test: /\.jsx?$/,
         enforce: "pre",
@@ -39,8 +39,8 @@ module.exports = {
         options: {
           emitWarning: true,
           configFile: "./.eslintrc.json"
-          }
-        },
+        }
+      },
       {
         test: /\.jsx?$/,
         loader: "babel-loader",
@@ -55,8 +55,19 @@ module.exports = {
             "styled-jsx/babel"
           ]
         }
-      }
+      },
+      {
+        test: /\.(png|gif|jp(e*)g|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8000,
+            name: 'images/[hash]-[name].[ext]'
+          }
+        }
+      },
     ]
+
   },
 
   plugins: [

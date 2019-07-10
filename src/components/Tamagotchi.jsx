@@ -18,12 +18,12 @@ function Tamagotchi(props) {
       <img src={Egg} />
 
       <div>
-        <h1>Timer: <span>{props.formattedWaitTime}</span></h1>
-        <h2>Hunger Level: <span>{props.hungerLevel}</span></h2>
-        <h2>Play Level: <span>{props.playLevel}</span></h2>
-        <h2>Health Level: <span>{props.healthLevel}</span></h2>
-        <h2>Clean Level: <span>{props.cleanLevel}</span></h2>
-        <h2>Poop Level: <span>{props.poopLevel}</span></h2>
+        <h1>Timer: <span>{tamagotchiStat.formattedWaitTime}</span></h1>
+        <h2>Hunger Level: <span>{tamagotchiStat.hungerLevel}</span></h2>
+        <h2>Play Level: <span>{tamagotchiStat.playLevel}</span></h2>
+        <h2>Health Level: <span>{tamagotchiStat.healthLevel}</span></h2>
+        <h2>Clean Level: <span>{tamagotchiStat.cleanLevel}</span></h2>
+        <h2>Poop Level: <span>{tamagotchiStat.poopLevel}</span></h2>
         <button onClick={handleNewTimerStartOnClick}>Start Timer</button>
       </div>
     </div>
@@ -41,6 +41,7 @@ Tamagotchi.propTypes = {
   cleanLevel: PropTypes.string.isRequired,
   poopLevel: PropTypes.string.isRequired,
   formattedWaitTime: PropTypes.string.isRequired,
+  tamagotchiStat: PropTypes.object,
   onNewTimerStart: PropTypes.func
 };
 

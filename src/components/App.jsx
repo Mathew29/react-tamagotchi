@@ -1,36 +1,91 @@
-import React from 'react'
+import React from 'react';
 import Error404 from './Error404';
-import Header from './Header';
 import { Switch, Route } from 'react-router-dom';
 import Moment from 'moment';
+import TamagotchiStat from './TamagotchiStat';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterTamagotchi: {
+        hungerLevel: '100',
+        playLevel: '100',
+        healthLevel: '100',
+        cleanLevel: '100',
+        poopLevel: '100',
+        formattedWaitTime: '0'
+      }
+    };
+    this.handleAddingNewTamagotchi = this.handleAddingNewTamagotchi.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            masterTamagotchi: []
-        };
-        this.handleAddingNewTamagotchi = this.handleAddingNewTamagotchi.bind(this);
-    }
+  componentDidMount() {
+    console.log('componentDidMount');
+    this.timer = setInterval(() => {         
+      this.updateStatTimer();
+    },
+    2000
+    );
+  }
 
-    handleAddingNewTamagotchi(newTamagotchi) {
-        let newMasterTamagotchi = this.state.masterTamagotchi.slice();
-        newTamagotchi.formattedWaitTime = (newTamagotchi.timeOpen).fromNow(true);
-        newMasterTamagotchi.push(newTamagotchi);
-        this.setState({masterTamagotchi: newMasterTamagotchi});
-    }
+  componentWillUnmount(){
+    console.log('componentWillUnmount');
+    clearInterval(this.timer);
+  }
 
-    render() {
-        return(
-            <div>
-                <Header />
-                <Switch>
-                    <Route component={Error404}/>
-                </Switch>
-            </div>
-        )
-    }
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+  }
+
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate');
+    return true;
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  updateStatTimer() {
+    let newStats = this.state.masterTamagotchi;
+    newStats.playLevel--;
+    // let newMasterTamagotchi = this.state.masterTamagotchi.slice();
+    // masterTamagotchi.forEach((stat) =>
+    //   stat.formattedWaitTime = (stat.timeOpen).fromNow(true)
+
+    // );
+    // const newStats =  (this.state.masterTamagotchi.timeOpen).fromNow(true)
+    this.setState({masterTamagotchi: newStats});
+    console.log('Update');   
+    
+  }
+
+  handleAddingNewTamagotchi(newTamagotchi) {    
+    // newTamagotchi.formattedWaitTime = (newTamagotchi.timeOpen).fromNow(true);
+    this.setState({masterTamagotchi: newTamagotchi});
+  }
+
+  render() {
+    return(
+      <div>
+        <Switch>
+          <Route exact path='/' render={() => <Tamagotchi
+          tamagotchiStat={this.state.masterTamagotchi}
+          onNewTimerStart={this.handleAddingNewTamagotchi} /> } />
+          <Route component={Error404}/>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

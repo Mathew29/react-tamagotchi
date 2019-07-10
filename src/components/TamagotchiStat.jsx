@@ -1,29 +1,31 @@
 import React from 'react';
 import Tamagotchi from './Tamagotchi';
+import PropTypes from 'prop-types';
 
-let masterTamagotchiStat = [
-    {
-        hungerLevel: '100',
-        playLevel: '100',
-        healthLevel: '100',
-        cleanLevel: '100',
-        poopLevel: '100'
-    }
-]
 
-function TamagotchiStat(){
-    return(
-        <div>
-            {masterTamagotchiStat.map((stat, index) =>
-                <Tamagotchi hungerLevel={stat.hungerLevel}
-                playLevel= {stat.playLevel}
-                healthLevel= {stat.healthLevel}
-                cleanLevel={stat.cleanLevel}
-                poopLevel={stat.poopLevel}
-                key={index}/>
-                )}
-        </div>
-    )
+function TamagotchiStat(props){  
+  let Tomo = null;
+  if(props.tamagotchiStat) {
+    Tomo = <Tamagotchi 
+      // formattedWaitTime={stat.formattedWaitTime}
+      hungerLevel={props.tamagotchiStat.hungerLevel}
+      playLevel= {props.tamagotchiStat.playLevel}
+      healthLevel= {props.tamagotchiStat.healthLevel}
+      cleanLevel={props.tamagotchiStat.cleanLevel}
+      poopLevel={props.tamagotchiStat.poopLevel}
+      // onNewTimerStart={props.onNewTimerStart}
+      />     
+  }
+
+  return(
+    <div>
+        {Tomo}
+    </div>
+  );
+
 }
+    TamagotchiStat.propTypes = {
+      tamagotchiStat: PropTypes.object
+    };
 
 export default TamagotchiStat;

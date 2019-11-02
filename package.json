@@ -22,7 +22,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "styled-jsx": "^3.2.1",
-    "yarn": "^1.16.0"
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
